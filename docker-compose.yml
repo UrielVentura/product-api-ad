@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: product_db
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
     ports:
       - '5432:5432'
     volumes:
@@ -17,11 +17,15 @@ services:
     ports:
       - '3000:3000'
     environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USERNAME: user
-      DB_PASSWORD: password
-      DB_DATABASE: product_db
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      CONTENTFUL_SPACE_ID: ${CONTENTFUL_SPACE_ID}
+      CONTENTFUL_ACCESS_TOKEN: ${CONTENTFUL_ACCESS_TOKEN}
+      CONTENTFUL_ENVIRONMENT: ${CONTENTFUL_ENVIRONMENT}
+      CONTENTFUL_CONTENT_TYPE: ${CONTENTFUL_CONTENT_TYPE}
     depends_on:
       - db
 
