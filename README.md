@@ -33,24 +33,24 @@ Create a `.env` file at the root of the project and add the following variables:
 
 ```plaintext
 # Database Configuration
-DB_HOST=db
-DB_PORT=5432
-DB_USERNAME=user
-DB_PASSWORD=password
-DB_DATABASE=product_db
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
 
 # Contentful Configuration
-CONTENTFUL_SPACE_ID=9xs1613l9f7v
-CONTENTFUL_ACCESS_TOKEN=I-ThsT55eE_B3sCUWEQyDT4VqVO3x__20ufuie9usns
-CONTENTFUL_ENVIRONMENT=master
-CONTENTFUL_CONTENT_TYPE=product
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_ENVIRONMENT=
+CONTENTFUL_CONTENT_TYPE=
 
 # Redis Configuration
-REDIS_HOST=redis
-REDIS_PORT=6379
+REDIS_HOST=
+REDIS_PORT=
 
 # JWT Configuration
-JWT_SECRET=secret
+JWT_SECRET=
 ```
 
 ---
