@@ -83,6 +83,14 @@
       "!**/dist/**"
     ],
     "coverageDirectory": "../coverage",
+    "coverageThreshold": {
+      "global": {
+        "statements": 30,
+        "branches": 30,
+        "functions": 30,
+        "lines": 30
+      }
+    },
     "testEnvironment": "node"
   }
 }

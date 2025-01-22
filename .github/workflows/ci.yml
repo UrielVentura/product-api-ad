@@ -13,29 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Paso 1: Checkout del código
+      # Step 1: Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Paso 2: Configurar Node.js
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Usa la versión LTS de Node.js
-          cache: 'npm' # Habilita el caché de npm para una instalación más rápida
+          node-version: 18 # Use the LTS version of Node.js
+          cache: 'npm' # Enable npm cache for faster installation
 
-      # Paso 3: Instalar dependencias
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # Paso 4: Ejecutar linter (ESLint)
+      # Step 4: Run linter (ESLint)
       - name: Run ESLint
         run: npm run lint
 
-      # Paso 5: Ejecutar pruebas unitarias
+      # Step 5: Run unit tests
       - name: Run unit tests
         run: npm run test
 
-      # Paso 6: Verificar cobertura de pruebas (opcional)
+      # Step 6: Check test coverage (optional)
       - name: Check test coverage
         run: npm run test:cov
