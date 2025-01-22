@@ -90,6 +90,20 @@ The API documentation is available in Swagger. Once the application is running, 
 
   `DELETE /products/:id`
 
+- **Generate JWT Token**:
+
+  `POST /auth/token`
+
+  This endpoint generates a JWT token that can be used to access the private endpoints. It uses dummy data (`test-user` and `adminApplyDigital`) for demonstration purposes.
+
+  Example response:
+
+  ```json
+  {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....."
+  }
+  ```
+
 ### **Private Endpoints (require JWT authentication)**
 
 - **Percentage of deleted products**:
@@ -121,6 +135,53 @@ To see the code coverage:
 ```bash
 npm run test:cov
 ```
+
+---
+
+## **Postman Collection**
+
+To make it easier to test the API endpoints, you can use the provided Postman collection and environment. Follow these steps:
+
+### **1. Download the Files**
+
+Download the following files from the `/postman` folder in this repository:
+
+- [product-api-ad.postman_collection.json](./postman/product-api-ad.postman_collection.json)
+- [product-api-ApplyD.postman_environment.json](./postman/product-api-ApplyD.postman_environment.json)
+
+### **2. Import the Collection and Environment**
+
+1. Open Postman.
+2. Click on **Import** in the top-left corner.
+3. Select the downloaded files:
+   - `product-api-ad.postman_collection.json`
+   - `product-api-ApplyD.postman_environment.json`
+
+### **3. Set Up the Environment**
+
+1. After importing, go to the **Environments** section in Postman.
+2. Select the `product-api-ApplyD` environment from the dropdown in the top-right corner.
+
+### **4. Start Testing**
+
+- Use the `Product API AD` collection to test all the API endpoints, including public and private routes.
+- For private endpoints, first generate a JWT token using the `POST /auth/token` endpoint and save it in the environment variable `token`.
+
+### **Example Workflow**
+
+1. **Generate a JWT Token**:
+
+   - Use the `POST /auth/token` endpoint to generate a token.
+   - The token will be automatically saved in the `token` environment variable.
+
+2. **Access Private Endpoints**:
+   - Use the `token` variable in the `Authorization` header for private endpoints.
+   - Example: `Authorization: Bearer {{token}}`
+
+### **Notes**
+
+- The collection includes examples for all endpoints, including pagination, filtering, and report generation.
+- The environment file contains predefined variables (e.g., `token`) to simplify testing.
 
 ---
 
