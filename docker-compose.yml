@@ -12,6 +12,13 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:6
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
   app:
     build: .
     ports:
@@ -28,6 +35,8 @@ services:
       CONTENTFUL_CONTENT_TYPE: ${CONTENTFUL_CONTENT_TYPE}
     depends_on:
       - db
+      - redis
 
 volumes:
   postgres_data:
+  redis_data:
