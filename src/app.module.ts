@@ -11,6 +11,8 @@ import { BullModule } from '@nestjs/bull';
 import { TasksModule } from './tasks/tasks.module';
 import { Product } from './products/product.entity';
 import { ProductService } from './products/products.service';
+import { AuthModule } from './auth/auth.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { ProductService } from './products/products.service';
     ContentfulModule,
     ProductsModule,
     TasksModule,
+    AuthModule,
+    ReportsModule,
   ],
   controllers: [AppController, ContentfulController],
   providers: [AppService, ContentfulService, TasksService],
