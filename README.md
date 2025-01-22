@@ -1,122 +1,122 @@
 # **Product API**
 
-Esta es una API desarrollada en NestJS que obtiene datos de productos desde Contentful, los almacena en una base de datos PostgreSQL y proporciona endpoints para consultar y gestionar los productos. Además, incluye un módulo de informes protegido por autenticación JWT.
+This is an API developed in NestJS that fetches product data from Contentful, stores it in a PostgreSQL database, and provides endpoints to query and manage the products. Additionally, it includes a report module protected by JWT authentication.
 
 ---
 
-## **Requerimientos**
+## **Requirements**
 
-- Node.js (v18 o superior)
-- Docker y Docker Compose
+- Node.js (v18 or higher)
+- Docker and Docker Compose
 - PostgreSQL
 
 ---
 
-## **Instalación**
+## **Installation**
 
-1. Clona el repositorio:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/UrielVentura/product-api-ad.git
+cd product-api-ad
+```
+
+2. Install the dependencies:
+
+```bash
+npm install
+```
+
+3. Configure the environment variables:
+
+Create a `.env` file at the root of the project and add the following variables:
+
+```plaintext
+# Database Configuration
+DB_HOST=db
+DB_PORT=5432
+DB_USERNAME=user
+DB_PASSWORD=password
+DB_DATABASE=product_db
+
+# Contentful Configuration
+CONTENTFUL_SPACE_ID=9xs1613l9f7v
+CONTENTFUL_ACCESS_TOKEN=I-ThsT55eE_B3sCUWEQyDT4VqVO3x__20ufuie9usns
+CONTENTFUL_ENVIRONMENT=master
+CONTENTFUL_CONTENT_TYPE=product
+
+# Redis Configuration
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+# JWT Configuration
+JWT_SECRET=secret
+```
+
+---
+
+### **Running with Docker**
+
+1. Build and start the containers: This command builds the Docker images and starts the containers in the background.
 
    ```bash
-   git clone https://github.com/UrielVentura/product-api-ad.git
-   cd product-api-ad
+   docker-compose up -d --build
    ```
 
-2. Instala las dependencias:
+2. Access the application:
 
+   Once the containers are running, the API will be available at `http://localhost:3000`.
+
+3. Stop the containers: This command stops and removes the containers.
    ```bash
-   npm install
-   ```
-
-3. Configura las variables de entorno:
-
-   Crea un archivo `.env` en la raíz del proyecto y agrega las siguientes variables:
-
-   ```paintext
-   # Database Configuration
-   DB_HOST=db
-   DB_PORT=5432
-   DB_USERNAME=user
-   DB_PASSWORD=password
-   DB_DATABASE=product_db
-
-   # Contentful Configuration
-   CONTENTFUL_SPACE_ID=9xs1613l9f7v
-   CONTENTFUL_ACCESS_TOKEN=I-ThsT55eE_B3sCUWEQyDT4VqVO3x__20ufuie9usns
-   CONTENTFUL_ENVIRONMENT=master
-   CONTENTFUL_CONTENT_TYPE=product
-
-   # Redis Configuration
-   REDIS_HOST=redis
-   REDIS_PORT=6379
-
-   # JWT Configuration
-   JWT_SECRET=secret
+   docker-compose down
    ```
 
 ---
 
-### **Ejecución con Docker**
+## **API Documentation**
 
-1.  Construye y levanta los contenedores: Este comando construye las imágenes de Docker y levanta los contenedores en segundo plano.
+### **API Documentation**
 
-    ```bash
-    docker-compose up -d --build
-    ```
+The API documentation is available in Swagger. Once the application is running, access it at: `http://localhost:3000/api/docs`
 
-2.  Accede a la aplicacion:
+### **Public Endpoints**
 
-        Una vez que los contenedores estén en ejecución, la API estará disponible en `http://localhost:3000`.
-
-3.  Detén los contenedores: Este comando detiene y elimina los contenedores.
-    ```bash
-    docker-compose down
-    ```
-
----
-
-## **Documentación de la API**
-
-### **Documentación de la API**
-
-La documentación de la API está disponible en Swagger. Una vez que la aplicación esté en ejecución, accede a: `http://localhost:3000/api/docs`
-
-### **Endpoints Públicos**
-
-- **Obtener productos paginados**:
+- **Get paginated products**:
 
   `GET /products`
 
-- **Eliminar un producto**:
+- **Delete a product**:
 
   `DELETE /products/:id`
 
-### **Endpoints Privados (requieren autenticación JWT)**
+### **Private Endpoints (require JWT authentication)**
 
-- **Porcentaje de productos eliminados**:
+- **Percentage of deleted products**:
 
   `GET /reports/deleted-percentage`
 
-- **Porcentaje de productos no eliminados**:
+- **Percentage of non-deleted products**:
 
   `GET /reports/non-deleted-percentage`
 
-- **Top 5 productos más caros**:
+- **Top 5 most expensive products**:
 
   `GET /reports/top-5-expensive`
 
 ---
 
-## **Pruebas**
+## **Testing**
 
-### **Pruebas**
+### **Testing**
 
-Para ejecutar las pruebas, usa el siguiente comando:
+To run the tests, use the following command:
 
 ```bash
 npm run test
 ```
 
-Para ver la cobertura de codigo:
+To see the code coverage:
 
 ```bash
 npm run test:cov
@@ -124,47 +124,47 @@ npm run test:cov
 
 ---
 
-## **Integración Continua (CI)**
+## **Continuous Integration (CI)**
 
-### **Integración Continua (CI)**
+### **Continuous Integration (CI)**
 
-El proyecto incluye un workflow de GitHub Actions que ejecuta pruebas y linters en cada push o pull request. El archivo de configuración se encuentra en `.github/workflows/ci.yml`.
+The project includes a GitHub Actions workflow that runs tests and linters on each push or pull request. The configuration file is located at `.github/workflows/ci.yml`.
 
 ---
 
-## **Estructura del Proyecto**
+## **Project Structure**
 
-El proyecto está organizado de la siguiente manera:
+The project is organized as follows:
 
 - **src/**
-  - `app.controller.ts`: Controlador principal de la aplicación.
-  - `app.module.ts`: Módulo principal de la aplicación.
-  - `app.service.ts`: Servicio principal de la aplicación.
-  - **auth/**: Módulo de autenticación (JWT).
-    - `auth.controller.ts`: Controlador de autenticación.
-    - `auth.module.ts`: Módulo de autenticación.
-    - `auth.service.ts`: Servicio de autenticación.
-    - `auth.service.spec.ts`: Pruebas del servicio de autenticación.
-    - `jwt.strategy.ts`: Estrategia JWT para autenticación.
-  - **contentful/**: Módulo para interactuar con Contentful.
-    - `contentful.controller.ts`: Controlador de Contentful.
-    - `contentful.module.ts`: Módulo de Contentful.
-    - `contentful.service.ts`: Servicio de Contentful.
-  - `main.ts`: Punto de entrada de la aplicación.
-  - **products/**: Módulo para gestionar productos.
-    - `product.dto.ts`: DTO para productos.
-    - `product.entity.ts`: Entidad de productos.
-    - `products.controller.ts`: Controlador de productos.
-    - `products.module.ts`: Módulo de productos.
-    - `products.service.ts`: Servicio de productos.
-    - `products.service.spec.ts`: Pruebas del servicio de productos.
-  - **reports/**: Módulo de informes.
-    - `reports.controller.ts`: Controlador de informes.
-    - `reports.module.ts`: Módulo de informes.
-    - `reports.service.ts`: Servicio de informes.
-    - `reports.service.spec.ts`: Pruebas del servicio de informes.
-  - **tasks/**: Módulo de tareas programadas.
-    - `tasks.module.ts`: Módulo de tareas.
-    - `tasks.processor.ts`: Procesador de tareas (Bull Queue).
-    - `tasks.service.ts`: Servicio de tareas.
-    - `tasks.service.spec.ts`: Pruebas del servicio de tareas.
+  - `app.controller.ts`: Main application controller.
+  - `app.module.ts`: Main application module.
+  - `app.service.ts`: Main application service.
+  - **auth/**: Authentication module (JWT).
+    - `auth.controller.ts`: Authentication controller.
+    - `auth.module.ts`: Authentication module.
+    - `auth.service.ts`: Authentication service.
+    - `auth.service.spec.ts`: Authentication service tests.
+    - `jwt.strategy.ts`: JWT strategy for authentication.
+  - **contentful/**: Module to interact with Contentful.
+    - `contentful.controller.ts`: Contentful controller.
+    - `contentful.module.ts`: Contentful module.
+    - `contentful.service.ts`: Contentful service.
+  - `main.ts`: Application entry point.
+  - **products/**: Module to manage products.
+    - `product.dto.ts`: Product DTO.
+    - `product.entity.ts`: Product entity.
+    - `products.controller.ts`: Products controller.
+    - `products.module.ts`: Products module.
+    - `products.service.ts`: Products service.
+    - `products.service.spec.ts`: Products service tests.
+  - **reports/**: Reports module.
+    - `reports.controller.ts`: Reports controller.
+    - `reports.module.ts`: Reports module.
+    - `reports.service.ts`: Reports service.
+    - `reports.service.spec.ts`: Reports service tests.
+  - **tasks/**: Scheduled tasks module.
+    - `tasks.module.ts`: Tasks module.
+    - `tasks.processor.ts`: Tasks processor (Bull Queue).
+    - `tasks.service.ts`: Tasks service.
+    - `tasks.service.spec.ts`: Tasks service tests.
