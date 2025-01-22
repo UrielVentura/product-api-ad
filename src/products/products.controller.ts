@@ -14,6 +14,9 @@ export class ProductsController {
     @Query('minPrice') minPrice?: number,
     @Query('maxPrice') maxPrice?: number,
   ) {
+    if (page < 1) page = 1;
+    if (limit < 1 || limit > 100) limit = 5;
+
     return this.productService.findAll(
       page,
       limit,

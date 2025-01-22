@@ -78,12 +78,18 @@ export class ProductService {
       take: limit,
     });
 
+    const totalPages = Math.ceil(total / limit);
+    const hasNextPage = page < totalPages;
+
     return {
       data: products,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      meta: {
+        page,
+        limit,
+        totalItems: total,
+        totalPages,
+        hasNextPage,
+      },
     };
   }
 
