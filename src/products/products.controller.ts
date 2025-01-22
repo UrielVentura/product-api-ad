@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
 import { ProductService } from './products.service';
 
 @Controller('products')
@@ -22,5 +22,10 @@ export class ProductsController {
       minPrice,
       maxPrice,
     );
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    return this.productService.remove(id);
   }
 }
