@@ -13,13 +13,17 @@ import { Product } from './products/product.entity';
 import { ProductService } from './products/products.service';
 import { AuthModule } from './auth/auth.module';
 import { ReportsModule } from './reports/reports.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     BullModule.forRoot({
       redis: {
-        host: 'redis',
-        port: 6379,
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT, 10),
       },
     }),
     TypeOrmModule.forRoot({
