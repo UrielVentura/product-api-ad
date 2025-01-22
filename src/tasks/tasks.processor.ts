@@ -1,5 +1,4 @@
 import { Processor, Process } from '@nestjs/bull';
-import { Job } from 'bull';
 import { Logger } from '@nestjs/common';
 import { ContentfulService } from '../contentful/contentful.service';
 import { ProductService } from '../products/products.service';
@@ -14,7 +13,7 @@ export class TasksProcessor {
   ) {}
 
   @Process('fetch-products')
-  async handleFetchProducts(job: Job) {
+  async handleFetchProducts() {
     this.logger.log('Starting fetch-products job');
     try {
       const products = await this.contentfulService.getProducts();
