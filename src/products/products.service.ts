@@ -58,18 +58,18 @@ export class ProductService {
   ) {
     const skip = (page - 1) * limit;
 
-    const where: any = { deleted: false }; // Excluir productos eliminados
+    const where: any = { deleted: false }; // Exclude deleted products
 
     if (name) {
-      where.name = Like(`%${name}%`); // Filtrar por nombre (búsqueda parcial)
+      where.name = Like(`%${name}%`); // Filter by name (partial search)
     }
 
     if (category) {
-      where.category = category; // Filtrar por categoría exacta
+      where.category = category; // Filter by exact category
     }
 
     if (minPrice !== undefined && maxPrice !== undefined) {
-      where.price = Between(minPrice, maxPrice); // Filtrar por rango de precios
+      where.price = Between(minPrice, maxPrice); // Filter by price range
     }
 
     const [products, total] = await this.productRepository.findAndCount({

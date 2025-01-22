@@ -43,7 +43,7 @@ export class ReportsService {
     const nonDeletedProducts = await this.productRepository.count({ where });
     const totalProducts = await this.productRepository.count();
 
-    if (totalProducts === 0) return 0; // Evitar división por cero
+    if (totalProducts === 0) return 0; // Avoid division by zero
 
     return (nonDeletedProducts / totalProducts) * 100;
   }
