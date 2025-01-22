@@ -1,0 +1,41 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso 1: Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Paso 2: Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Usa la versión LTS de Node.js
+          cache: 'npm' # Habilita el caché de npm para una instalación más rápida
+
+      # Paso 3: Instalar dependencias
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      # Paso 4: Ejecutar linter (ESLint)
+      - name: Run ESLint
+        run: npm run lint
+
+      # Paso 5: Ejecutar pruebas unitarias
+      - name: Run unit tests
+        run: npm run test
+
+      # Paso 6: Verificar cobertura de pruebas (opcional)
+      - name: Check test coverage
+        run: npm run test:cov
